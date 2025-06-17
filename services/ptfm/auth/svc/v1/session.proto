@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package services.ptfm.auth.svc.v1;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+message Session {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue account_id = 2;
+  google.protobuf.StringValue identity_id = 3;
+  google.protobuf.StringValue token = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
+  
+message CreateSessionWithEmailPasswordRequest {
+  google.protobuf.StringValue email = 1;
+  google.protobuf.StringValue password = 2;
+}
+
+message CreateSessionWithEmailPasswordResponse {
+  Session session = 1;
+}
+
+message CreateSessionWithPhonePasswordRequest {
+  google.protobuf.StringValue phone = 1;
+  google.protobuf.StringValue password = 2;
+}
+
+message CreateSessionWithPhonePasswordResponse {
+  Session session = 1;
+}
+
+message DeleteSessionFromIDRequest {
+  google.protobuf.StringValue id = 1;
+}
+
+message DeleteSessionFromIDResponse {
+  google.protobuf.Empty empty = 1;
+}
+
+message GetSessionByIDRequest {
+  google.protobuf.StringValue id = 1;
+}
+
+message GetSessionByIDResponse {
+  Session session = 1;
+}
+
+message GetSessionByTokenRequest {
+  google.protobuf.StringValue token = 1;
+}
+
+message GetSessionByTokenResponse {
+  Session session = 1;
+}

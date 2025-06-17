@@ -1,0 +1,12 @@
+version: v1
+managed:
+  enabled: true
+  go_package_prefix:
+    default: github.com/goauthnz/contracts/generated
+plugins:
+  - plugin: buf.build/protocolbuffers/go
+    out: generated
+    opt: paths=source_relative
+  - plugin: buf.build/bufbuild/connect-go
+    out: generated
+    opt: paths=source_relative

@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package services.user.store.svc.v1;
+
+import "services/user/store/svc/v1/user.proto";
+
+option go_package = "user/store/svc/v1";
+
+service UserStoreSvc {
+    // CreateUser creates a new user.
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+
+    // Getter methods
+    rpc GetUserByID(GetUserByIDRequest) returns (GetUserByIDResponse);
+    rpc GetUserByAccountID(GetUserByAccountIDRequest) returns (GetUserByAccountIDResponse);
+
+    // Profile picture related methods
+    rpc UpdateProfilePicture(UpdateProfilePictureRequest) returns (UpdateProfilePictureResponse);
+    rpc DeleteProfilePicture(DeleteProfilePictureRequest) returns (DeleteProfilePictureResponse);
+}

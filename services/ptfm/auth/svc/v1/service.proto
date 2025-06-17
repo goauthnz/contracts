@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package services.ptfm.auth.svc.v1;
+
+import "services/ptfm/auth/svc/v1/account.proto";
+import "services/ptfm/auth/svc/v1/session.proto";
+
+option go_package = "ptfm/auth/svc/v1";
+
+service PtfmAuthSvc {
+    rpc CreateAccountWithEmail(CreateAccountWithEmailRequest) returns (CreateAccountWithEmailResponse);
+    rpc CreateAccountWithEmailPassword(CreateAccountWithEmailPasswordRequest) returns (CreateAccountWithEmailPasswordResponse);
+    rpc CreateAccountWithPhone(CreateAccountWithPhoneRequest) returns (CreateAccountWithPhoneResponse);
+    rpc CreateAccountWithPhonePassword(CreateAccountWithPhonePasswordRequest) returns (CreateAccountWithPhonePasswordResponse);
+
+    rpc SendIdentityVerificationCode(SendIdentityVerificationCodeRequest) returns (SendIdentityVerificationCodeResponse);
+    rpc VerifyIdentity(VerifyIdentityRequest) returns (VerifyIdentityResponse);
+
+    rpc CreateAccountWithSSO(CreateAccountWithSSORequest) returns (CreateAccountWithSSOResponse);
+
+    rpc GetAccountMFASetup(GetAccountMFASetupRequest) returns (GetAccountMFASetupResponse);
+    rpc EnableAccountMFA(EnableAccountMFARequest) returns (EnableAccountMFAResponse);
+    rpc DisableAccountMFA(DisableAccountMFARequest) returns (DisableAccountMFAResponse);
+
+    rpc GetAccountByID(GetAccountByIDRequest) returns (GetAccountByIDResponse);
+    rpc GetAccountByIdentityID(GetAccountByIdentityIDRequest) returns (GetAccountByIdentityIDResponse);
+    rpc GetAccountByEmail(GetAccountByEmailRequest) returns (GetAccountByEmailResponse);
+    rpc GetAccountByPhone(GetAccountByPhoneRequest) returns (GetAccountByPhoneResponse);
+
+    rpc GetVerifiedEmailIdentityByEmail(GetVerifiedEmailIdentityByEmailRequest) returns (GetVerifiedEmailIdentityByEmailResponse);
+    rpc GetVerifiedPhoneIdentityByPhone(GetVerifiedPhoneIdentityByPhoneRequest) returns (GetVerifiedPhoneIdentityByPhoneResponse);
+
+    rpc ChangeAccountPassword(ChangeAccountPasswordRequest) returns (ChangeAccountPasswordResponse);
+    rpc SetAccountPassword(SetAccountPasswordRequest) returns (SetAccountPasswordResponse);
+
+    rpc CreateSessionWithEmailPassword(CreateSessionWithEmailPasswordRequest) returns (CreateSessionWithEmailPasswordResponse);
+    rpc CreateSessionWithPhonePassword(CreateSessionWithPhonePasswordRequest) returns (CreateSessionWithPhonePasswordResponse);
+
+    rpc DeleteSessionFromID(DeleteSessionFromIDRequest) returns (DeleteSessionFromIDResponse);
+    rpc GetSessionByID(GetSessionByIDRequest) returns (GetSessionByIDResponse);
+    rpc GetSessionByToken(GetSessionByTokenRequest) returns (GetSessionByTokenResponse);
+}
