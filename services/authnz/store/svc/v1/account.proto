@@ -1,0 +1,201 @@
+syntax = "proto3";
+
+package services.authnz.store.svc.v1;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+message Account {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue password = 2;
+  Identities identities = 3;
+  google.protobuf.BoolValue is_mfa_enabled = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+}
+
+message Identities {
+  repeated EmailIdentity email_identities = 1;
+  repeated PhoneIdentity phone_identities = 2;
+  repeated SSOIdentity sso_identities = 3;
+}
+
+message EmailIdentity {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue email = 2;
+  google.protobuf.Timestamp created_at = 3;
+  optional google.protobuf.Timestamp verified_at = 4;
+}
+
+message PhoneIdentity {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue phone = 2;
+  google.protobuf.Timestamp created_at = 3;
+  optional google.protobuf.Timestamp verified_at = 4;
+}
+
+message SSOIdentity {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue provider = 2;
+  google.protobuf.StringValue external_id = 3;
+  google.protobuf.Timestamp created_at = 4;
+}
+
+message CreateAccountWithEmailRequest {
+  google.protobuf.StringValue email = 1;
+}
+
+message CreateAccountWithEmailResponse {
+  Account account = 1;
+  google.protobuf.StringValue verification_code = 2;
+}
+
+message CreateAccountWithEmailPasswordRequest {
+  google.protobuf.StringValue email = 1;
+  google.protobuf.StringValue password = 2;
+}
+
+message CreateAccountWithEmailPasswordResponse {
+  Account account = 1;
+  google.protobuf.StringValue verification_code = 2;
+}
+
+message CreateAccountWithPhoneRequest {
+  google.protobuf.StringValue phone = 1;
+}
+
+message CreateAccountWithPhoneResponse {
+  Account account = 1;
+  google.protobuf.StringValue verification_code = 2;
+}
+
+message CreateAccountWithPhonePasswordRequest {
+  google.protobuf.StringValue phone = 1;
+  google.protobuf.StringValue password = 2;
+}
+
+message CreateAccountWithPhonePasswordResponse {
+  Account account = 1;
+  google.protobuf.StringValue verification_code = 2;
+}
+
+message SendIdentityVerificationCodeRequest {
+  google.protobuf.StringValue identity_id = 1;
+}
+
+message SendIdentityVerificationCodeResponse {
+  google.protobuf.Empty empty = 1;
+}
+
+message VerifyIdentityRequest {
+  google.protobuf.StringValue identity_id = 1;
+  google.protobuf.StringValue verification_code = 2;
+}
+
+message VerifyIdentityResponse {
+  google.protobuf.Empty empty = 1;
+}
+
+message CreateAccountWithSSORequest {
+  google.protobuf.StringValue provider = 1;
+  google.protobuf.StringValue code = 2;
+}
+
+message CreateAccountWithSSOResponse {
+  Account account = 1;
+}
+
+message GetAccountByIDRequest {
+  google.protobuf.StringValue id = 1;
+}
+
+message GetAccountByIDResponse {
+  Account account = 1;
+}
+
+message GetAccountByIdentityIDRequest {
+  google.protobuf.StringValue identity_id = 1;
+}
+
+message GetAccountByIdentityIDResponse {
+  Account account = 1;
+}
+
+message GetAccountByEmailRequest {
+  google.protobuf.StringValue email = 1;
+}
+
+message GetAccountByEmailResponse {
+  Account account = 1;
+}
+
+message GetAccountByPhoneRequest {
+  google.protobuf.StringValue phone = 1;
+}
+
+message GetAccountByPhoneResponse {
+  Account account = 1;
+}
+
+message ChangeAccountPasswordRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue old_password = 2;
+  google.protobuf.StringValue new_password = 3;
+}
+
+message ChangeAccountPasswordResponse {
+  google.protobuf.Empty empty = 1;
+}
+
+message SetAccountPasswordRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue password = 2;
+}
+
+message SetAccountPasswordResponse {
+  google.protobuf.Empty empty = 1;
+}
+
+message GetVerifiedEmailIdentityByEmailRequest {
+  google.protobuf.StringValue email = 1;
+}
+
+message GetVerifiedEmailIdentityByEmailResponse {
+  EmailIdentity identity = 1;
+}
+
+message GetVerifiedPhoneIdentityByPhoneRequest {
+  google.protobuf.StringValue phone = 1;
+}
+
+message GetVerifiedPhoneIdentityByPhoneResponse {
+  PhoneIdentity identity = 1;
+}
+
+message GetAccountMFASetupRequest {
+  google.protobuf.StringValue id = 1;
+}
+
+message GetAccountMFASetupResponse {
+  google.protobuf.StringValue secret = 1;
+  google.protobuf.StringValue qr_code_url = 2;
+}
+
+message EnableAccountMFARequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue verification_code = 3;
+}
+
+message EnableAccountMFAResponse {
+  google.protobuf.Empty empty = 1;
+}
+
+message DisableAccountMFARequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue verification_code = 2;
+}
+
+message DisableAccountMFAResponse {
+  google.protobuf.Empty empty = 1;
+}

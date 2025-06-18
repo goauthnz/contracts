@@ -5,9 +5,9 @@ import "time"
 type Account struct {
 	ID           string             `json:"id"`
 	Identities   *AccountIdentities `json:"identities"`
-	User         *User              `json:"user"`
 	IsMFAEnabled bool               `json:"is_mfa_enabled"`
 	IsVerified   bool               `json:"is_verified"`
+	HasPassword  bool               `json:"has_password"`
 	CreatedAt    time.Time          `json:"created_at"`
 }
 
@@ -38,8 +38,7 @@ type SSOIdentity struct {
 }
 
 type PublicAccount struct {
-	ID         string      `json:"id"`
-	User       *PublicUser `json:"user"`
-	IsVerified bool        `json:"is_verified"`
-	CreatedAt  time.Time   `json:"created_at"`
+	ID         string    `json:"id"`
+	IsVerified bool      `json:"is_verified"`
+	CreatedAt  time.Time `json:"created_at"`
 }
